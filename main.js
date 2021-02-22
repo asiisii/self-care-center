@@ -1,18 +1,15 @@
-//query selector variables go here 👇
+                //query selector variables go here 👇
 var affirmInput = document.querySelector('#aff');
 var affirmLbl = document.querySelector('.affirm');
 var mantraInput = document.querySelector('#mant')
 var mantraLbl = document.querySelector('.mantra');
 var bellIcon = document.querySelector('.bell-icon');
 var showMsg = document.querySelector('.show-msg');
-
 var viewFavMsg = document.querySelector('.view-fav');
-
 var headingSection = document.querySelector('.heading');
 var messageSection  = document.querySelector('.message');
 var bellSection  = document.querySelector('.bell');
 var favSection  = document.querySelector('.fav-lists');
-
 
 var affirmations = [
   'I am love. I am purpose. I was made with divine intention.',
@@ -55,7 +52,7 @@ var clearBtn = document.querySelector('.clear-btn');
 var favBtn = document.querySelector('.fav-btn');
 var viewFavBtn = document.querySelector('.view-favMsg-btn');
 var goBackBtn = document.querySelector('.go-back');
-//event listeners go here 👇
+                //event listeners go here 👇
 msgBtn.addEventListener('click', displayMsg);
 clearBtn.addEventListener('click', clearMsg);
 favBtn.addEventListener('click', favoriteMsg);
@@ -63,7 +60,7 @@ favSection.addEventListener('click', deleteFavMsg);
 viewFavMsg.addEventListener('click',makeMiniFavMsgList);
 viewFavBtn.addEventListener('click', openFavList);
 goBackBtn.addEventListener('click', goToMainPg);
-//List of functions 👇
+                //List of functions 👇
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -95,27 +92,30 @@ function clearMsg(){
   viewFavBtn.classList.add('hidden');
   clearPage();
 }
-function getRandomAffirm(){
-  showMsg.innerText = affirmations[getRandomIndex(affirmations)];
+function addToMsg(){
   hideIcon();
   favBtn.innerText = "🤍";
   currentMsg = showMsg.innerText;
 }
+function getRandomAffirm(){
+  showMsg.innerText = affirmations[getRandomIndex(affirmations)];
+  addToMsg();
+}
 function getRandomMantra(){
   showMsg.innerText = mantras[getRandomIndex(affirmations)];
-  hideIcon();
-  favBtn.innerText = "🤍";
-  currentMsg = showMsg.innerText;
+  addToMsg();
+}
+function addToDisplayMsg(){
+  favBtn.classList.remove('hidden');
+  viewFavBtn.classList.remove('hidden');
 }
 function displayMsg(){
   if(affirmInput.checked){
     getRandomAffirm();
-    favBtn.classList.remove('hidden');
-    viewFavBtn.classList.remove('hidden');
+    addToDisplayMsg();
   }else if(mantraInput.checked){
     getRandomMantra();
-    favBtn.classList.remove('hidden');
-    viewFavBtn.classList.remove('hidden');
+    addToDisplayMsg();
   }else{
     alert("🙏🏽 AT LEAST ONE MESSAGE OPTION MUST BE SELECTED 🙏🏽");
   }
