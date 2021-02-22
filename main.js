@@ -121,7 +121,7 @@ function displayMsg(){
   }
 }
 function favoriteMsg(){
-  if(!favSavedMsg.includes(favSavedMsg.message)){
+  if(!favSavedMsg.includes(currentMsg)){
     favBtn.innerText = "♥️";
     favSavedMsg.push({
       id: Date.now(),
