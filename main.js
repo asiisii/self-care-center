@@ -11,6 +11,12 @@ var messageSection  = document.querySelector('.message');
 var bellSection  = document.querySelector('.bell');
 var favSection  = document.querySelector('.fav-lists');
 
+var msgBtn = document.querySelector('.msg-btn');
+var clearBtn = document.querySelector('.clear-btn');
+var favBtn = document.querySelector('.fav-btn');
+var viewFavBtn = document.querySelector('.view-favMsg-btn');
+var goBackBtn = document.querySelector('.go-back');
+
 var affirmations = [
   'I am love. I am purpose. I was made with divine intention.',
   'I don’t sweat the small stuff.',
@@ -43,16 +49,11 @@ var mantras = [
   'Onward and upward.',
   'I am the sky, the rest is weather.'
 ];
-var favSavedMsg = [];
+var favSavedMsg = localStorage.getItem("favorites") ?  JSON.parse(localStorage.getItem("favorites")) :[];
 var currentMsg;
-var index = Date.now();
 
-var msgBtn = document.querySelector('.msg-btn');
-var clearBtn = document.querySelector('.clear-btn');
-var favBtn = document.querySelector('.fav-btn');
-var viewFavBtn = document.querySelector('.view-favMsg-btn');
-var goBackBtn = document.querySelector('.go-back');
                 //event listeners go here 👇
+window.addEventListener('load',makeMiniFavMsgList);
 msgBtn.addEventListener('click', displayMsg);
 clearBtn.addEventListener('click', clearMsg);
 favBtn.addEventListener('click', favoriteMsg);
@@ -127,6 +128,8 @@ function favoriteMsg(){
       id: Date.now(),
       message: currentMsg,}
     );
+    localStorage.setItem("favorites", JSON.stringify(favSavedMsg));
+
     makeMiniFavMsgList();
   }else{
     favBtn.innerText = "♥️";
@@ -152,5 +155,6 @@ function deleteFavMsg(event){
       favSavedMsg.splice(i,1);
     }
   }
+  localStorage.setItem("favorites", JSON.stringify(favSavedMsg));
   makeMiniFavMsgList();
 }
